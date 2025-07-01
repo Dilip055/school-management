@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+
+
+@media (max-width: 640px) {
+    .swal-small-popup {
+      width: 80% ;
+      padding: 1rem ;
+    }
+  
+    .swal-small-title {
+      font-size: 1rem ;
+    }
+  
+    .swal-small-btn {
+      font-size: 0.85rem ;
+      padding: 0.4rem 1rem ;
+    }
+    .swal-small-text {
+        font-size: 0.275rem ;
+        color: #4B5563 ; 
+        margin-top: 0.5rem;
+      }
+     
+  }
+  
