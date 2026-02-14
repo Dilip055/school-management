@@ -5,12 +5,10 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// __dirname equivalent for ES Modules
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
-// Build the absolute path to the CA file
-const caPath = path.join(__dirname, 'tidb-ca.pem');  // Assuming CA is in the same folder as this file
-
+// Path to CA certificate
+const caPath = path.join(__dirname, 'isrgrootx1.pem');
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
