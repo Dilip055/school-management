@@ -11,7 +11,7 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     port: process.env.DB_PORT || 4000,   // ⭐ TiDB uses port 4000
     dialect: 'mysql',
-    logging: false,
+    logging: true,
 
     dialectOptions: {
       ssl: {
