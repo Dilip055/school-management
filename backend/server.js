@@ -114,8 +114,10 @@ sequelize.sync({ force: false }).then(() => {
 
     // Default user
     const defaultUser = {
+      username: 'Admin',
       email: "admin@apollo.com",
-      password: "Apollo123"
+      password: "Apollo123",
+      role: 'admin',
     };
 
     try {
@@ -125,8 +127,10 @@ sequelize.sync({ force: false }).then(() => {
         // Hash password before saving
         const hashedPassword = await bcrypt.hash(defaultUser.password, 10);
         await User.create({
+          username: defaultUser.username,
           email: defaultUser.email,
-          password: hashedPassword
+          password: hashedPassword,
+          role: defaultUser.role,
         });
         console.log("Default admin user created");
       } else {
