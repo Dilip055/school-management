@@ -19,7 +19,7 @@ export default function Login() {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.post("http://localhost:2000/api/auth/login", data);
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, data);
       const role = res.data.role;
       const userData = { id: res.data.id, role: role };
       login(userData, res.data.token);
