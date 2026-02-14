@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize');
+
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -18,3 +18,7 @@ const sequelize = new Sequelize(
 sequelize.authenticate()
   .then(() => console.log('Connected to TiDB!'))
   .catch(err => console.error('TiDB connection error:', err.message));
+
+
+
+export default sequelize;
