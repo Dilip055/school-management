@@ -67,10 +67,13 @@ const StudentList = () => {
     if (!/^[0-9]{10}$/.test(formData.phone))
       newErrors.phoneErr = "Please enter a valid phone number.";
     if (!formData.gender) newErrors.genderErr = "Please select gender.";
-    if (!formData.dateOfBirth) newErrors.dobErr = "Please select date of birth.";
-    if (!formData.bloodGroup) newErrors.bloodGroupErr = "Please select blood group.";
+    if (!formData.dateOfBirth)
+      newErrors.dobErr = "Please select date of birth.";
+    if (!formData.bloodGroup)
+      newErrors.bloodGroupErr = "Please select blood group.";
     if (!formData.classId) newErrors.classErr = "Please select class.";
-    if (!formData.address.trim()) newErrors.addressErr = "Please enter address.";
+    if (!formData.address.trim())
+      newErrors.addressErr = "Please enter address.";
     if (!id && !profile) newErrors.fileErr = "Please upload a profile picture.";
     setError(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -166,81 +169,79 @@ const StudentList = () => {
     }
   };
 
-
   const handleSubmitStudent = async (e) => {
-  e.preventDefault();
-  if (!validateStudentForm()) {
-    return;
-  }
-
-  const submitData = new FormData();
-  submitData.append("profilePicture", profile);
-  submitData.append("username", formData.username);
-  submitData.append("email", formData.email);
-  submitData.append("phone", formData.phone);
-  submitData.append("gender", formData.gender);
-  submitData.append("dateOfBirth", formData.dateOfBirth);
-  submitData.append("bloodGroup", formData.bloodGroup);
-  submitData.append("classId", formData.classId);
-  submitData.append("address", formData.address);
-  submitData.append("role", "student");
-
-  try {
-    if (id && edit) {
-      const { success, data, error } = await handleEditUser(id, submitData);
-      if (success) {
-        Swal.fire({
-          icon: "success",
-          text: data,
-          confirmButtonColor: "#f97316",
-          customClass: {
-            popup: "swal-small-popup",
-            title: "swal-small-title",
-            text: "swal-small-text",
-            confirmButton: "swal-small-btn",
-          },
-        });
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: error,
-          text: "Something went wrong!",
-        });
-      }
-    } else {
-      const { success, data, error } = await handleAddUser(submitData);
-      if (success) {
-        Swal.fire({
-          icon: "success",
-          text: data,
-          confirmButtonColor: "#f97316",
-          customClass: {
-            popup: "swal-small-popup",
-            title: "swal-small-title",
-            text: "swal-small-text",
-            confirmButton: "swal-small-btn",
-          },
-        });
-        setStudentInfo(true);
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: error,
-          text: "Something went wrong!",
-        });
-      }
+    e.preventDefault();
+    if (!validateStudentForm()) {
+      return;
     }
 
-    closeStudentModal();
-  } catch (err) {
-    Swal.fire({
-      icon: "error",
-      title: err?.response?.data?.message,
-      text: "Something went wrong. Please try again.",
-    });
-  }
-};
+    const submitData = new FormData();
+    submitData.append("profilePicture", profile);
+    submitData.append("username", formData.username);
+    submitData.append("email", formData.email);
+    submitData.append("phone", formData.phone);
+    submitData.append("gender", formData.gender);
+    submitData.append("dateOfBirth", formData.dateOfBirth);
+    submitData.append("bloodGroup", formData.bloodGroup);
+    submitData.append("classId", formData.classId);
+    submitData.append("address", formData.address);
+    submitData.append("role", "student");
 
+    try {
+      if (id && edit) {
+        const { success, data, error } = await handleEditUser(id, submitData);
+        if (success) {
+          Swal.fire({
+            icon: "success",
+            text: data,
+            confirmButtonColor: "#f97316",
+            customClass: {
+              popup: "swal-small-popup",
+              title: "swal-small-title",
+              text: "swal-small-text",
+              confirmButton: "swal-small-btn",
+            },
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: error,
+            text: "Something went wrong!",
+          });
+        }
+      } else {
+        const { success, data, error } = await handleAddUser(submitData);
+        if (success) {
+          Swal.fire({
+            icon: "success",
+            text: data,
+            confirmButtonColor: "#f97316",
+            customClass: {
+              popup: "swal-small-popup",
+              title: "swal-small-title",
+              text: "swal-small-text",
+              confirmButton: "swal-small-btn",
+            },
+          });
+          setStudentInfo(true);
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: error,
+            text: "Something went wrong!",
+          });
+        }
+      }
+
+      closeStudentModal();
+    } catch (err) {
+      Swal.fire({
+        icon: "error",
+        title: err?.response?.data?.message,
+        text: "Something went wrong. Please try again.",
+      });
+    }
+  };
 
   const handleSubmitParent = async (e) => {
     e.preventDefault();
@@ -279,11 +280,13 @@ const StudentList = () => {
   useEffect(() => {
     let filtered = users;
     if (selectedClass) {
-      filtered = filtered.filter((student) => student.classId === selectedClass);
+      filtered = filtered.filter(
+        (student) => student.classId === selectedClass,
+      );
     }
     if (searchTerm) {
       filtered = filtered.filter((student) =>
-        student.username.toLowerCase().includes(searchTerm.toLowerCase())
+        student.username.toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
     setFilteredStudents(filtered);

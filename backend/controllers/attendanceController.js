@@ -35,7 +35,10 @@ export const markBulkAttendance = async (req, res) => {
   };
 
   if (existingRecords.length && inserted.length === 0) {
-    throw new CustomError("Attendance already exists for all selected students on this date.",200);
+    throw new CustomError(
+      "Attendance already exists for all selected students on this date.",
+      200,
+    );
   }
 
   if (existingRecords.length && inserted.length) {

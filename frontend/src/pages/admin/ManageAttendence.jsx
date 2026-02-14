@@ -97,7 +97,7 @@ const ManageAttendance = () => {
               {monthName} {selectedYear}
             </span>
           </h3>
-          <div className="w-full overflow-x-auto rounded-lg shadow-md mt-4">
+          <div className="w-full h-[calc(100vh-180px)] overflow-x-auto rounded-lg shadow-md mt-4">
             <table className="w-full border-collapse shadow-md rounded-lg overflow-hidden">
               <thead>
                 <tr className="bg-blue-100 text-sm text-blue-700">

@@ -1,6 +1,6 @@
-import Event from '../models/event.model.js';
-import User from '../models/user.model.js';
-import CustomError from '../utils/customError.js';
+import Event from "../models/event.model.js";
+import User from "../models/user.model.js";
+import CustomError from "../utils/customError.js";
 
 export const createEvent = async (req, res) => {
   const { title, description, startDate, endDate, location } = req.body;
@@ -15,7 +15,7 @@ export const createEvent = async (req, res) => {
     createdBy,
   });
 
-  res.status(201).json({ message: 'Event created successfully' });
+  res.status(201).json({ message: "Event created successfully" });
 };
 
 export const getAllEvents = async (req, res) => {
@@ -23,8 +23,8 @@ export const getAllEvents = async (req, res) => {
     include: [
       {
         model: User,
-        as: 'creator',
-        attributes: ['username'],
+        as: "creator",
+        attributes: ["username"],
       },
     ],
   });
@@ -37,12 +37,12 @@ export const updateEvent = async (req, res) => {
   const updates = req.body;
 
   const event = await Event.findByPk(id);
-  if (!event) throw new CustomError('Event not found', 404);
+  if (!event) throw new CustomError("Event not found", 404);
 
   await event.update(updates);
 
   res.status(200).json({
-    message: 'Event updated successfully',
+    message: "Event updated successfully",
     data: event,
   });
 };
@@ -51,9 +51,9 @@ export const deleteEvent = async (req, res) => {
   const { id } = req.params;
 
   const event = await Event.findByPk(id);
-  if (!event) throw new CustomError('Event not found', 404);
+  if (!event) throw new CustomError("Event not found", 404);
 
   await event.destroy();
 
-  res.status(200).json({ message: 'Event deleted successfully' });
+  res.status(200).json({ message: "Event deleted successfully" });
 };
