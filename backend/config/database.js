@@ -1,8 +1,15 @@
 import Sequelize from 'sequelize';
 import fs from 'fs';
+import path from 'path';
 import dotenv from 'dotenv';
 
 dotenv.config();
+
+// __dirname equivalent for ES Modules
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
+// Build the absolute path to the CA file
+const caPath = path.join(__dirname, 'tidb-ca.pem');  // Assuming CA is in the same folder as this file
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -14,7 +21,7 @@ const sequelize = new Sequelize(
     dialect: 'mysql',
     dialectOptions: {
       ssl: {
-        ca: fs.readFileSync(process.env.DB_CA_PATH),  // Load CA certificate
+        ca: fs.readFileSync(caPath),
         rejectUnauthorized: true
       }
     },
