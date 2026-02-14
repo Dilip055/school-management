@@ -25,6 +25,7 @@ import { associateModels } from './models/index.js';
 import User from './models/user.model.js';
 // import User from './models/user.model.js';
 // import { hash } from 'bcryptjs';
+import bcrypt from "bcrypt";
 
 dotenv.config();
 
