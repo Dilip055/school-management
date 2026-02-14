@@ -22,6 +22,7 @@ import galleryRoute from './routes/gallery.js'
 import cookieParser from 'cookie-parser';
 import {errorHandler} from './middleware/errorHandler.js';
 import { associateModels } from './models/index.js';
+import User from './models/user.model.js';
 // import User from './models/user.model.js';
 // import { hash } from 'bcryptjs';
 
@@ -90,11 +91,50 @@ app.use('/api/gallery', galleryRoute)
 app.use(errorHandler);
 
 
-// Sync DB and start server
+// // Sync DB and start server
+// sequelize.sync({ force: false }).then(() => {
+//   associateModels();
+//   app.listen(process.env.PORT, () => {
+//     const defaultUser = {
+//   email: "admin@apollo.com",
+//   password: "Apollo123" // hashed in DB
+// };
+
+// User.findOne({ email: defaultUser.email }).then(user => {
+//   if (!user) User.create(defaultUser);
+// });
+//     console.log(`Server running on port ${process.env.PORT}`);
+//   });
+// });
+
 sequelize.sync({ force: false }).then(() => {
   associateModels();
-  app.listen(process.env.PORT, () => {
+  app.listen(process.env.PORT, async () => {
     console.log(`Server running on port ${process.env.PORT}`);
+
+    // Default user
+    const defaultUser = {
+      email: "admin@apollo.com",
+      password: "Apollo123"
+    };
+
+    try {
+      // Check if user already exists
+      const user = await User.findOne({ where: { email: defaultUser.email } });
+      if (!user) {
+        // Hash password before saving
+        const hashedPassword = await bcrypt.hash(defaultUser.password, 10);
+        await User.create({
+          email: defaultUser.email,
+          password: hashedPassword
+        });
+        console.log("Default admin user created");
+      } else {
+        console.log("Default admin user already exists");
+      }
+    } catch (err) {
+      console.error("Error creating default user:", err);
+    }
   });
 });
 
