@@ -1,6 +1,7 @@
 import React from "react";
 import { User } from "lucide-react";
 import { useAuth } from "../Context/Authcontext";
+import { getUploadUrl } from "../utils/uploadUrl";
 
 const ProfilePage = () => {
   const { userInfo } = useAuth();
@@ -12,7 +13,7 @@ const ProfilePage = () => {
             <img
               src={
                 userInfo?.profilePicture
-                  ? `http://localhost:2000/${userInfo?.profilePicture}`
+                  ? getUploadUrl(userInfo?.profilePicture)
                   : 'https://static.vecteezy.com/system/resources/previews/027/448/973/non_2x/avatar-account-icon-default-social-media-profile-photo-vector.jpg'
               }
               alt="Student"

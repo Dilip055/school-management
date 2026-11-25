@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Award, BookOpen, Calendar, Camera, FileText, Sparkles, Trophy, Users, X } from "lucide-react";
 import Breadcrumb from "../Components/Breadcrumb";
 import useGalleryApi from "../../hooks/useGalleryApi";
+import { getUploadUrl } from "../../utils/uploadUrl";
 
 
 const GalleryPage = () => {
@@ -46,9 +47,9 @@ const GalleryPage = () => {
             <img
             onClick={() => {
                   setOpenImage(true);
-                  setSelectedImg(`http://localhost:2000/${img.galleryImgPath}`);
+                  setSelectedImg(getUploadUrl(img.galleryImgPath));
                 }}
-              src={`http://localhost:2000/${img.galleryImgPath}`}
+              src={getUploadUrl(img.galleryImgPath)}
               alt={`Gallery ${img.imgcategory}`}
               className=":w-full md:h-64 h-30 object-cover transform group-hover:scale-105 transition duration-300"
             />

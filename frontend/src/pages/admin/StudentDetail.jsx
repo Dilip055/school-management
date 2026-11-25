@@ -4,6 +4,7 @@ import useUserApi from '../../hooks/useUserApi';
 import useClassApi from '../../hooks/useClassApi';
 import { ClipLoader } from 'react-spinners';
 import { Mail, MapPin, Phone, User } from 'lucide-react';
+import { getUploadUrl } from '../../utils/uploadUrl';
 
 const StudentDetail = () => {
   const { studentId } = useParams();
@@ -36,7 +37,7 @@ const StudentDetail = () => {
                 <div className="flex md:flex-row flex-col items-center gap-6">
                   <div className="relative">
                     <img
-                      src={`http://localhost:2000/${studentDetails.profilePicture}`}
+                      src={getUploadUrl(studentDetails.profilePicture)}
                       alt={studentDetails.username}
                       className="w-35 h-35 rounded-full border-4 border-white shadow-lg object-cover"
                     />
@@ -101,7 +102,7 @@ const StudentDetail = () => {
                 <div className="flex md:flex-row flex-col items-center gap-6">
                   <div className="relative">
                     <img
-                      src={`http://localhost:2000/${studentDetails?.Parents[0]?.profilePicture}`}
+                      src={getUploadUrl(studentDetails?.Parents[0]?.profilePicture)}
                       alt={studentDetails?.Parents[0]?.username}
                       className="w-35 h-35 rounded-full border-4 border-white shadow-lg object-cover"
                     />

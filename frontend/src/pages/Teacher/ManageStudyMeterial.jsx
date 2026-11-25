@@ -1,6 +1,7 @@
 
 
 import React, { useEffect, useState } from "react";
+import { getUploadUrl } from "../../utils/uploadUrl";
 import { 
   Search, 
   Plus, 
@@ -279,7 +280,7 @@ const ManageStudyMeterial = () => {
                 </div>
 
                 <a
-                  href={`http://localhost:2000/${study.filePath}`}
+                  href={getUploadUrl(study.filePath)}
                   target="_blank"
                   rel="noopener noreferrer"
                   download

@@ -6,6 +6,7 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import Swal from 'sweetalert2';
 import { GripVertical, Search } from 'lucide-react';
 import FullScreenLoader from '../../components/FullScreenLoader';
+import { getUploadUrl } from '../../utils/uploadUrl';
 
 const ManageTeacher = () => {
   const { users, loading, handleAddTeacher, handleEditUser, handleDelete, credentials } = useUserApi();
@@ -78,7 +79,7 @@ const ManageTeacher = () => {
     setTeacherModel(true);
 
     if (teacher.profilePicture) {
-      setTeacherAvatar(`http://localhost:2000/${teacher.profilePicture}`);
+      setTeacherAvatar(getUploadUrl(teacher.profilePicture));
     }
 
     setTeacherData({
@@ -264,7 +265,7 @@ const handleTeacherDelete = async (id) => {
                     <td className="p-3">{idx + 1}</td>
                     <td className="p-3">
                       <img
-                        src={`http://localhost:2000/${teacher.profilePicture}`}
+                        src={getUploadUrl(teacher.profilePicture)}
                         alt="Teacher"
                         className="w-12 h-12 rounded-full mx-auto"
                       />

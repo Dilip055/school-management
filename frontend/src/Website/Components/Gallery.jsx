@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { BookOpen } from "lucide-react";
 import useGalleryApi from "../../hooks/useGalleryApi";
 import { useNavigate } from "react-router";
+import { getUploadUrl } from "../../utils/uploadUrl";
 
 
 const Gallery = () => {
@@ -58,7 +59,7 @@ const Gallery = () => {
         {gallery.map((img, index) => (
           <div key={index} className="px-2">
             <img
-              src={`http://localhost:2000/${img.galleryImgPath}`}
+              src={getUploadUrl(img.galleryImgPath)}
               alt={`Slide ${index}`}
               className="rounded-xl w-full h-64 object-cover shadow-lg"
             />

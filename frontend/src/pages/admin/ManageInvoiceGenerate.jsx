@@ -18,6 +18,7 @@ const ManageInvoiceGenerate = () => {
     updateStatus,
     loading,
     setAllInvoice,
+    getAllInvoice,
     handleDelete,
     getStudentInvoices,
   } = useInvoiceApi();

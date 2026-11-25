@@ -9,6 +9,7 @@ import { useAuth } from "../Context/Authcontext";
 import { Link } from "react-router";
 import UpdatePasswordModal from "./UpdatePasswordModal";
 import { useState } from "react";
+import { getUploadUrl } from "../utils/uploadUrl";
 
 export default function Navbar() {
   const { userInfo } = useAuth();
@@ -30,7 +31,7 @@ export default function Navbar() {
                       alt="profile img"
                       src={
                         userInfo?.profilePicture
-                          ? `http://localhost:2000/${userInfo?.profilePicture}`
+                          ? getUploadUrl(userInfo?.profilePicture)
                           : 'https://static.vecteezy.com/system/resources/previews/027/448/973/non_2x/avatar-account-icon-default-social-media-profile-photo-vector.jpg'
                       }
                       className="size-10 rounded-lg"

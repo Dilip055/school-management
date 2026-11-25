@@ -5,6 +5,7 @@ import ParentFormModal from "../../components/ParentFormModal.jsx";
 import Swal from "sweetalert2";
 import { GripVertical, Search } from "lucide-react";
 import FullScreenLoader from "../../components/FullScreenLoader.jsx";
+import { getUploadUrl } from "../../utils/uploadUrl";
 
 const ManageParents = () => {
   const { users, loading, handleDelete, handleEditUser } = useUserApi();
@@ -151,7 +152,7 @@ const ManageParents = () => {
     setParentModel(true);
 
     if (parent.profilePicture) {
-      setParentAvatar(`http://localhost:2000/${parent.profilePicture}`);
+      setParentAvatar(getUploadUrl(parent.profilePicture));
     }
 
     setParentFromData({
@@ -253,7 +254,7 @@ const handleParentDelete = async (id) => {
                     <td className="p-3">{idx + 1}.</td>
                     <td className="p-3">
                       <img
-                        src={`http://localhost:2000/${parent.profilePicture}`}
+                        src={getUploadUrl(parent.profilePicture)}
                         alt="avatar"
                         className="w-16 h-16 rounded-full mx-auto"
                       />

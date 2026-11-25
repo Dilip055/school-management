@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import useStudyMeterialApi from '../../hooks/useStudyMeterialApi';
 import { LibraryBig, Search } from 'lucide-react';
 import FullScreenLoader from '../../components/FullScreenLoader';
+import { getUploadUrl } from '../../utils/uploadUrl';
 
 const StudyMeterial = () => {
   const { studentClassMeterial, loading } = useStudyMeterialApi();
@@ -80,7 +81,7 @@ const StudyMeterial = () => {
               </td>
               <td className="py-3 text-center">
                 <a
-                  href={`http://localhost:2000/${study.filePath}`}
+                  href={getUploadUrl(study.filePath)}
                   target="_blank"
                   rel="noopener noreferrer"
                   download
