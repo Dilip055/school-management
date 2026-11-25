@@ -2,6 +2,7 @@ import { GripVertical, Mail, Phone } from "lucide-react";
 import React from "react";
 import { Link } from "react-router";
 import FullScreenLoader from "../components/FullScreenLoader";
+import { getUploadUrl } from "../utils/uploadUrl";
 
 const StudentTable = ({
   students,
@@ -190,4 +191,3 @@ const StudentTable = ({
 };
 
 export default StudentTable;
-import { getUploadUrl } from "../utils/uploadUrl";
