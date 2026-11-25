@@ -266,7 +266,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     const currentPath = location.pathname;
-    const roleMenuItems = menuItems[userInfo?.role?.toLowerCase?.()] || [];
+    const roleMenuItems = menuItems[user?.role?.toLowerCase?.()] || [];
 
     const directMatch = roleMenuItems.find((item) => item.path === currentPath);
     if (directMatch) {
@@ -392,7 +392,7 @@ const Sidebar = () => {
 
         <nav className="flex-1 overflow-y-auto py-4 px-2 scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800">
           <ul className="space-y-1 ps-0">
-            {(menuItems[userInfo?.role?.toLowerCase?.()] || []).map((item) => (
+            {(menuItems[user?.role?.toLowerCase?.()] || []).map((item) => (
               <li key={item.key}>
                 <div
                   className={`group relative flex items-center cursor-pointer select-none rounded-xl transition-all duration-200 ${
