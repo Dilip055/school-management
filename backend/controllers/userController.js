@@ -11,7 +11,7 @@ dotenv.config();
 export const createUserWithRole = async (req, res) => {
   try {
     const { username, email, role, phone, address } = req.body;
-    const filePath = req.file ? req.file.path : null;
+    const filePath = req.file ? `uploads/${req.file.filename}` : null;
 
     if (!['student', 'teacher', 'parent'].includes(role)) {
       throw new CustomError('Invalid role specified', 400);
@@ -175,6 +175,7 @@ export const updateUser = async (req, res) => {
   const { username, email, role, phone, address } = req.body;
 
   const updatedData = { username, email, role, phone, address };
+  if (req.file) updatedData.profilePicture = `uploads/${req.file.filename}`;
 
   if (role === 'student') {
     const { dateOfBirth, gender, bloodGroup, admissionDate, classId, rollNumber } = req.body;

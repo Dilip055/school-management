@@ -17,6 +17,7 @@ import GalleryImgModal from "../../components/GalleryImgModal";
 import Swal from "sweetalert2";
 import useGalleryApi from "../../hooks/useGalleryApi";
 import FullScreenLoader from "../../components/FullScreenLoader";
+import { getUploadUrl } from "../../utils/uploadUrl";
 
 const ManageGallery = () => {
   const { handleAddGallery, gallery,fetchGallery, handleDeleteGallery, loading } = useGalleryApi();
@@ -32,6 +33,7 @@ const ManageGallery = () => {
 
   const [openImg, setOpenImage] = useState(false);
   const [selectedImg, setSelectedImg] = useState(null);
+
   const categories = [
     { label: "Event", icon: Calendar },
     { label: "Annual Function", icon: Award },
@@ -141,19 +143,19 @@ const ManageGallery = () => {
     return filteredImages.length > 0 ? (
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 md:gap-4 gap-2">
         {loading ? (
-           <FullScreenLoader />
+          <FullScreenLoader />
         ) : (
-          filteredImages.map((img, index) => (
-            <div key={index} className=" rounded overflow-hidden w-full h-full">
+          filteredImages.map((img) => (
+            <div key={img.id} className="rounded overflow-hidden w-full h-full">
               <img
                 onClick={() => {
                   setImgId(img.id);
                   setOpenImage(true);
-                  setSelectedImg(`http://localhost:2000/${img.galleryImgPath}`);
+                  setSelectedImg(getUploadUrl(img.galleryImgPath));
                 }}
-                src={`http://localhost:2000/${img.galleryImgPath}`}
+                src={getUploadUrl(img.galleryImgPath)}
                 alt={`Gallery ${img.imgcategory}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover cursor-pointer"
               />
             </div>
           ))

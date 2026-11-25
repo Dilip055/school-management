@@ -3,7 +3,7 @@ import CustomError from "../utils/customError.js";
 
 export const addGallery = async (req, res) => {
   const { imgcategory } = req.body;
-  const imgPaths = req.files.map(file => file.path);
+  const imgPaths = (req.files || []).map((file) => `uploads/${file.filename}`);
 
   if (!imgcategory || imgPaths.length === 0) {
     throw new CustomError('Missing required fields', 400);

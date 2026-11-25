@@ -63,9 +63,9 @@ const StudentTable = ({
                 <td className="p-3 font-medium text-center">{idx + 1}.</td>
                 <td className="p-2 w-20">
                   <img
-                    src={`http://localhost:2000/${student.profilePicture}`}
-                    alt="avatar"
-                    className="w-16 h-16 object-cover"
+                    src={getUploadUrl(student.profilePicture)}
+                    alt="Student avatar"
+                    className="w-16 h-16 object-cover rounded-full"
                   />
                 </td>
                 <td className="p-3 font-medium">{student.username}</td>
@@ -160,7 +160,7 @@ const StudentTable = ({
                           setEdit(true);
                           setAvatar(
                             student.profilePicture
-                              ? `http://localhost:2000/${student.profilePicture}`
+                              ? getUploadUrl(student.profilePicture)
                               : null,
                           );
                           setOpenDropdown(null);
@@ -190,3 +190,4 @@ const StudentTable = ({
 };
 
 export default StudentTable;
+import { getUploadUrl } from "../utils/uploadUrl";

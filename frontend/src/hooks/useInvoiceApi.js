@@ -1,7 +1,6 @@
 // useInvoiceApi.js
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
 
 const useInvoiceApi = () => {
   const [invoice, setInvoice] = useState([]);
@@ -19,11 +18,10 @@ const useInvoiceApi = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setInvoice(response.data);
-      getAllInvoice();
-      return { success: true, data: response?.data?.message };
+      await getAllInvoice();
+      return { success: true, data: response?.data?.message, invoice: response?.data?.invoice };
     } catch (error) {
-      return { success: false, error: error?.response?.data?.message };
+      return { success: false, error: error?.response?.data?.message || "Unable to generate invoice" };
     } finally {
       setLoading(false);
     }
@@ -39,7 +37,7 @@ const useInvoiceApi = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setAllInvoice(response.data);
+      setAllInvoice(response.data || []);
     } catch (error) {
       setAllInvoice([]);
     }finally{
@@ -106,12 +104,9 @@ const useInvoiceApi = () => {
         )
       );
       
-      setInvoice((prevInvoices) =>
-        prevInvoices.map ? 
-        prevInvoices.map((inv) =>
-          inv.id === invoiceId ? { ...inv, status: response.data.status } : inv
-        ) : prevInvoices
-      );
+      setInvoice((prev) => prev?.invoices
+        ? { ...prev, invoices: prev.invoices.map((inv) => inv.id === invoiceId ? { ...inv, status: response.data.status, paidAmount: response.data.paidAmount, totalAmount: response.data.totalAmount } : inv) }
+        : prev);
       
       return { success: true, data: response?.data?.message };
     } catch (error) {

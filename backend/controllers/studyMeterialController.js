@@ -6,7 +6,7 @@ import CustomError from '../utils/customError.js';
 
 export const createStudyMaterial = async (req, res) => {
   const { title, description, classId, subjectId } = req.body;
-  const filePath = req.file?.path || req.body.filePath;
+  const filePath = req.file ? `uploads/${req.file.filename}` : req.body.filePath;
   const user = req.user;
 
   if (!filePath) {

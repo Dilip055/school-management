@@ -19,14 +19,17 @@ export const generateInvoice = async (req, res) => {
   const totalAmount = fees.reduce((sum, fee) => sum + fee.amount, 0);
   const dueDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
-  await Invoice.create({
+  const invoice = await Invoice.create({
     studentId,
     totalAmount,
     dueDate,
     status: "unpaid",
   });
 
-  return res.status(201).json({ message: "Invoice assigned successfully" });
+  return res.status(201).json({
+    message: "Invoice assigned successfully",
+    invoice,
+  });
 };
 
 export const invoiceAll = async (req, res) => {
